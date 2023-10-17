@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./index.css";
 
 const pizzaData = [
   {
@@ -48,7 +49,7 @@ const pizzaData = [
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Menu />
       <Footer />
@@ -57,32 +58,63 @@ function App() {
 }
 
 function Header() {
-  return <h1>Fast React Pizza Co.</h1>;
+  const style = { color: "red", fontSize: "32px", textTransform: "uppercase" };
+
+  return (
+    <header>
+      <h1 style={style}>Fast React Pizza Co.</h1>;
+    </header>
+  );
 }
 function Menu() {
   return (
-    <div>
+    <main className="menu">
       <h2>Our menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-    </div>
+      <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price="10"
+      />
+      <Pizza
+        name="Pizza Funghi"
+        ingredients="Tomato, mushrooms"
+        photoName="pizzas/funghi.jpg"
+        price="12"
+      />
+      <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price="10"
+      />
+    </main>
   );
 }
 //jsx
 function Footer() {
+  const hour = new Date().getHours();
+  const openHour = 12;
+  const closeHour = 22;
+
+  // if (hour >= openHour && hour <= closeHour) alert("We are open!");
+  // else alert("Sorry, we are closed");
+
   return (
-    <footer>{new Date().toLocaleTimeString()}.We're currently open!</footer>
+    <footer className="footer">
+      {new Date().toLocaleTimeString()}.We're currently open!
+    </footer>
   );
 }
 
 //Component with catipcal letter conventopm
-function Pizza() {
+function Pizza(props) {
+  console.log(props);
   return (
     <div>
-      <img src="pizzas/spinaci.jpg" alt="Pizza spinaci" />
-      <h2>Pizza Spinaci</h2>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>;
+      <img src={props.photoName} alt={props.name} />
+      <h3>{props.name}</h3>
+      <p>{props.ingredients}</p>;
     </div>
   );
 }
